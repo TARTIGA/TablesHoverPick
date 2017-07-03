@@ -1,3 +1,0 @@
-### Table Hover View
-
-##Description
