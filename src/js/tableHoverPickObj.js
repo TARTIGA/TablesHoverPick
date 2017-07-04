@@ -8,6 +8,7 @@
             obj: null,
             trs: null,
             tds: null,
+            spans: null,
 
             /**
              * wrap text in td
@@ -20,19 +21,7 @@
                 }
             },
 
-            // /**
-            //  * Leave table
-            //  * 
-            //  */
-            // tableLeave: function() {
-            //     $(this.obj).mouseleave(function() {
 
-            //         console.log("LEAVE ")
-            //         $(this.tds).find('span').removeClass("pick");
-            //         $(this.tds).parent().removeClass("hoverRow");
-            //         $(this).find('span').removeClass("hoverCol");
-            //     });
-            // }
         }
 
 
@@ -43,13 +32,14 @@
             Table.obj = tables[i];
             Table.trs = $(Table.obj).find("tr");
             Table.tds = $(Table.obj).find("td");
+            Table.spans = $(Table.obj).find("span");
             console.log("tds.length - " + i + " " + Table.tds.length);
             console.log("trs.length - " + i + " " + Table.trs.length);
             Table.spanText(); // wrap span 
             // Table.tableLeave(); // leave table method
             tdsOver(Table.tds, Table.trs); // handler Over
             tdsOut(Table.tds, Table.trs); // handler Out
-            spanOut(Table.tds.find("span"));
+            spanOut(Table.spans);
         }
 
         /**
@@ -67,13 +57,13 @@
         }
 
         /**
-         * handler Over
+         * handler Enter
          * 
          * @param {any} tds 
          * @param {any} trs 
          */
         function tdsOver(tds, trs) {
-            $(tds).on('mouseover', function(evt) {
+            $(tds).on('mouseenter', function(evt) {
                 console.log("over");
                 resetHover(tds, trs);
                 $(this).find('span').addClass("pick");
@@ -86,13 +76,13 @@
         }
 
         /**
-         * handler Over
+         * handler Leave
          * 
          * @param {any} tds 
          * @param {any} trs 
          */
         function tdsOut(tds, trs) {
-            $(tds).on('mouseout', function(evt) {
+            $(tds).on('mouseleave', function(evt) {
                 console.log("out");
                 resetHover(tds, trs);
                 $(this).find('span').removeClass("pick");
@@ -104,9 +94,11 @@
 
         }
 
-        function spanOut(evt) {
-            $(evt).on('mouseout', function(evt) {
-                console.info('AAAAAA');
+        function spanOut(elem) {
+
+            $(elem).mouseleave(function(evt) {
+
+                console.info('333333');
 
             });
 
