@@ -25,7 +25,23 @@
 
             },
 
+<<<<<<< HEAD
 
+=======
+            // /**
+            //  * Leave table
+            //  * 
+            //  */
+            // tableLeave: function() {
+            //     $(this.obj).mouseleave(function() {
+
+            //         console.log("LEAVE ")
+            //         $(this.tds).find('span').removeClass("pick");
+            //         $(this.tds).parent().removeClass("hoverRow");
+            //         $(this).find('span').removeClass("hoverCol");
+            //     });
+            // }
+>>>>>>> c8e4bc1658fbfdb7647c1e43bf29c69f3ac7bc73
         }
 
 
@@ -40,8 +56,9 @@
             console.log("tds.length - " + i + " " + Table.tds.length);
             console.log("trs.length - " + i + " " + Table.trs.length);
             Table.spanText(); // wrap span 
-            Table.tableLeave(); // leave table method
+            // Table.tableLeave(); // leave table method
             tdsOver(Table.tds, Table.trs); // handler Over
+<<<<<<< HEAD
 
             spanOut(Table.spans);
 
@@ -50,6 +67,10 @@
 
 
 
+=======
+            tdsOut(Table.tds, Table.trs); // handler Out
+            spanOut(Table.tds.find("span"));
+>>>>>>> c8e4bc1658fbfdb7647c1e43bf29c69f3ac7bc73
         }
 
         /**
@@ -73,8 +94,12 @@
          * @param {any} trs 
          */
         function tdsOver(tds, trs) {
+<<<<<<< HEAD
             $(tds).on('mouseenter', function(evt) {
                 // console.log("evt - " + evt.currentTarget.nodeName);
+=======
+            $(tds).on('mouseover', function(evt) {
+>>>>>>> c8e4bc1658fbfdb7647c1e43bf29c69f3ac7bc73
                 console.log("over");
                 resetHover(tds, trs);
                 $(this).find('span').addClass("pick");
@@ -99,9 +124,13 @@
          * @param {any} trs 
          */
         function tdsOut(tds, trs) {
+<<<<<<< HEAD
 
             $(tds).on('mouseleave', function(evt) {
                 console.log("evt - " + evt.target.nodeName);
+=======
+            $(tds).on('mouseout', function(evt) {
+>>>>>>> c8e4bc1658fbfdb7647c1e43bf29c69f3ac7bc73
                 console.log("out");
                 resetHover(tds, trs);
                 $(this).find('span').removeClass("pick");
@@ -109,6 +138,7 @@
                 $(colHover(this, trs)).removeClass("hoverCol");
             });
 
+<<<<<<< HEAD
         }
 
         function spanOut(span) {
@@ -117,10 +147,29 @@
             });
             $(span).mouseleave(function(evt) {
                 console.info('Leave');
+=======
+
+>>>>>>> c8e4bc1658fbfdb7647c1e43bf29c69f3ac7bc73
             });
 
         }
 
+<<<<<<< HEAD
+=======
+        function spanOut(evt) {
+            $(evt).on('mouseout', function(evt) {
+                console.info('AAAAAA');
+
+            });
+
+        }
+
+
+
+
+
+
+>>>>>>> c8e4bc1658fbfdb7647c1e43bf29c69f3ac7bc73
 
         /**
          * reset all Hover
