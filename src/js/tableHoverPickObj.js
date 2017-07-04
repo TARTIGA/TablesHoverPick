@@ -68,7 +68,7 @@
 
             function tableLeave(table) {
                 $(table).mouseleave(function() {
-                    console.log("leave");
+
                     $(table.tds).find('span').removeClass("pick");
                     $(table.tds).parent().removeClass("hoverRow");
                 })
