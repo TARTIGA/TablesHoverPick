@@ -35,7 +35,7 @@
             $(this).parent().addClass('hoverRow')
             $(this).html("<span class=\"pick\">" + text + "</span>");
         });
-        $(tds).on('mouseout', function(itcol) {
+        $(tds).on('mouseout', function() {
             // console.log("out");
             $(this).find('span').removeClass("pick");
             $(this).parent().removeClass('hoverRow');
