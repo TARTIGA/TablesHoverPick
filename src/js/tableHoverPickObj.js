@@ -20,19 +20,19 @@
                 }
             },
 
-            /**
-             * Leave table
-             * 
-             */
-            tableLeave: function() {
-                $(this.obj).mouseleave(function() {
+            // /**
+            //  * Leave table
+            //  * 
+            //  */
+            // tableLeave: function() {
+            //     $(this.obj).mouseleave(function() {
 
-                    console.log("LEAVE ")
-                    $(this.tds).find('span').removeClass("pick");
-                    $(this.tds).parent().removeClass("hoverRow");
-                    $(this).find('span').removeClass("hoverCol");
-                });
-            }
+            //         console.log("LEAVE ")
+            //         $(this.tds).find('span').removeClass("pick");
+            //         $(this.tds).parent().removeClass("hoverRow");
+            //         $(this).find('span').removeClass("hoverCol");
+            //     });
+            // }
         }
 
 
@@ -46,9 +46,10 @@
             console.log("tds.length - " + i + " " + Table.tds.length);
             console.log("trs.length - " + i + " " + Table.trs.length);
             Table.spanText(); // wrap span 
-            Table.tableLeave(); // leave table method
+            // Table.tableLeave(); // leave table method
             tdsOver(Table.tds, Table.trs); // handler Over
             tdsOut(Table.tds, Table.trs); // handler Out
+            spanOut(Table.tds.find("span"));
         }
 
         /**
@@ -72,13 +73,13 @@
          * @param {any} trs 
          */
         function tdsOver(tds, trs) {
-            $(tds).on('mouseenter', function() {
+            $(tds).on('mouseover', function(evt) {
                 console.log("over");
                 resetHover(tds, trs);
                 $(this).find('span').addClass("pick");
                 $(colHover(this, trs)).addClass("hoverCol");
                 var text = $(this).text(); // text 
-                $(this).parent().addClass('hoverRow')
+                $(this).parent().addClass('hoverRow');
                 $(this).html("<span class=\"pick\">" + text + "</span>");
             });
 
@@ -91,16 +92,31 @@
          * @param {any} trs 
          */
         function tdsOut(tds, trs) {
-            $(tds).on('mouseleave', function() {
+            $(tds).on('mouseout', function(evt) {
                 console.log("out");
                 resetHover(tds, trs);
                 $(this).find('span').removeClass("pick");
                 $(this).parent().removeClass('hoverRow');
                 $(colHover(this, trs)).removeClass("hoverCol");
 
+
             });
 
         }
+
+        function spanOut(evt) {
+            $(evt).on('mouseout', function(evt) {
+                console.info('AAAAAA');
+
+            });
+
+        }
+
+
+
+
+
+
 
         /**
          * reset all Hover
