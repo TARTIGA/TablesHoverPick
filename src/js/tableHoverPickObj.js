@@ -4,56 +4,45 @@
         var tables = $(".table-pick");
         /** Object**/
         var Table = {
-            index: null,
-            obj: null,
-            trs: null,
-            tds: null,
+                index: null,
+                obj: null,
+                trs: null,
+                tds: null,
+                spans: null,
 
-            /**
-             * wrap text in td
-             * 
-             */
-            spanText: function() {
-                for (var i = 0, j = $(this.tds).length; i < j; ++i) {
-                    var text = $((this.tds)[i]).text(); // text 
-                    $((this.tds)[i]).html("<span >" + text + "</span>");
-                }
-            },
-
-            // /**
-            //  * Leave table
-            //  * 
-            //  */
-            // tableLeave: function() {
-            //     $(this.obj).mouseleave(function() {
-
-            //         console.log("LEAVE ")
-            //         $(this.tds).find('span').removeClass("pick");
-            //         $(this.tds).parent().removeClass("hoverRow");
-            //         $(this).find('span').removeClass("hoverCol");
-            //     });
-            // }
-        }
+                /**
+                 * wrap text in td
+                 * 
+                 */
+                wrapText: function() {
+                    for (var i = 0, j = $(this.tds).length; i < j; ++i) {
+                        var text = $((this.tds)[i]).text(); // text 
+                        $((this.tds)[i]).html("<span >" + text + "</span>"); // wrap span
+                    }
+                    // init spans in table for out hover
+                    this.spans = $(Table.obj).find("span");
+                },
 
 
-        console.log("tables l " + tables.length)
-            //INIT 
+            }
+            // console.log("tables length - - " + tables.length)
+
+        //INIT OBJECT
         for (var i = 0; i < tables.length; i++) {
             Table.index = [i];
             Table.obj = tables[i];
             Table.trs = $(Table.obj).find("tr");
             Table.tds = $(Table.obj).find("td");
-            console.log("tds.length - " + i + " " + Table.tds.length);
-            console.log("trs.length - " + i + " " + Table.trs.length);
-            Table.spanText(); // wrap span 
-            // Table.tableLeave(); // leave table method
+            // console.log("tds.length - " + i + " " + Table.tds.length);
+            // console.log("trs.length - " + i + " " + Table.trs.length);
+
+            Table.wrapText(); // wrap span 
             tdsOver(Table.tds, Table.trs); // handler Over
-            tdsOut(Table.tds, Table.trs); // handler Out
-            spanOut(Table.tds.find("span"));
+            spanOut(Table.spans, Table.tds, Table.trs); // handler Out FOR SPAN
         }
 
         /**
-         * hover cols
+         * hover cols function
          * 
          * @param {any} elem 
          * @param {any} trs 
@@ -73,8 +62,8 @@
          * @param {any} trs 
          */
         function tdsOver(tds, trs) {
-            $(tds).on('mouseover', function(evt) {
-                console.log("over");
+            $(tds).on('mouseenter', function(evt) {
+                // console.log("over");
                 resetHover(tds, trs);
                 $(this).find('span').addClass("pick");
                 $(colHover(this, trs)).addClass("hoverCol");
@@ -86,37 +75,23 @@
         }
 
         /**
-         * handler Over
+         * handler OVER SPAN - !IMPORTANT
          * 
+         * @param {any} elem 
          * @param {any} tds 
          * @param {any} trs 
          */
-        function tdsOut(tds, trs) {
-            $(tds).on('mouseout', function(evt) {
-                console.log("out");
-                resetHover(tds, trs);
-                $(this).find('span').removeClass("pick");
-                $(this).parent().removeClass('hoverRow');
-                $(colHover(this, trs)).removeClass("hoverCol");
+        function spanOut(elem, tds, trs) {
+            $(this).mouseleave(function(event) {
 
-
+                var node = event.relatedTarget.nodeName;
+                if ((node != "TD" && node != "SPAN") || node == "TH") {
+                    // console.info('NE TD NE SPAN or TH');
+                    $(this).find("span").removeClass("pick");
+                    resetHover(tds, trs);
+                }
             });
-
         }
-
-        function spanOut(evt) {
-            $(evt).on('mouseout', function(evt) {
-                console.info('AAAAAA');
-
-            });
-
-        }
-
-
-
-
-
-
 
         /**
          * reset all Hover
@@ -129,19 +104,5 @@
             $(tds).find('span').removeClass("hoverCol");
             $(trs).removeClass("hoverRow");
         }
-
-
-        // /***Click reset */
-
-
-        // $(document).on('click', function(event) {
-        //     if (event.target.id != "tables")
-        //         alert("e.target.id -- " + event.currentTarget);
-        // });
-
-
-
-
-
     })
 })();
