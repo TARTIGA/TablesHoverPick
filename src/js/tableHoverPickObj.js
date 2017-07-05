@@ -1,8 +1,8 @@
 (function() {
     $(document).ready(function() {
         // Init all tables this class "table-pick"
-        var container = $("#tables");
-        var tables = $("#tables").find(".table");
+        var container = $("#tableHoverContainer");
+        var tables = $(container).find(".table");
         /** Object**/
         var Table = {
             index: null,
