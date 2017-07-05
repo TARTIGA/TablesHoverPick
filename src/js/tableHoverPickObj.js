@@ -1,31 +1,32 @@
 (function() {
     $(document).ready(function() {
         // Init all tables this class "table-pick"
-        var tables = $(".table-pick");
+        var container = $("#tables");
+        var tables = $("#tables").find(".table");
         /** Object**/
         var Table = {
-                index: null,
-                obj: null,
-                trs: null,
-                tds: null,
-                spans: null,
+            index: null,
+            obj: null,
+            trs: null,
+            tds: null,
+            spans: null,
 
-                /**
-                 * wrap text in td
-                 * 
-                 */
-                wrapText: function() {
-                    for (var i = 0, j = $(this.tds).length; i < j; ++i) {
-                        var text = $((this.tds)[i]).text(); // text 
-                        $((this.tds)[i]).html("<span >" + text + "</span>"); // wrap span
-                    }
-                    // init spans in table for out hover
-                    this.spans = $(Table.obj).find("span");
-                },
+            /**
+             * wrap text in td
+             * 
+             */
+            wrapText: function() {
+                for (var i = 0, j = $(this.tds).length; i < j; ++i) {
+                    var text = $((this.tds)[i]).text(); // text 
+                    $((this.tds)[i]).html("<span >" + text + "</span>"); // wrap span
+                }
+                // init spans in table for out hover
+                this.spans = $(Table.obj).find("span");
+            },
 
 
-            }
-            // console.log("tables length - - " + tables.length)
+        }
+        console.log("tables length - - " + tables.length)
 
         //INIT OBJECT
         for (var i = 0; i < tables.length; i++) {
