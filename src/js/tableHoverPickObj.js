@@ -84,9 +84,10 @@
         function spanOut(elem, tds, trs) {
             $(this).mouseleave(function(event) {
 
-                var node = event.relatedTarget.nodeName;
+                var node = event.target.nodeName;
                 if ((node != "TD" && node != "SPAN") || node == "TH") {
                     // console.info('NE TD NE SPAN or TH');
+                    // console.info('node' + node);
                     $(this).find("span").removeClass("pick");
                     resetHover(tds, trs);
                 }
